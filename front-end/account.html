@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="src/jquery.js"></script>
+    <script src="src/jquery-mask.js"></script>
+    <script src="src/crypto-js.js"></script>
+    <script src="https://kit.fontawesome.com/ee05ffadc7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/account.css">
+    <title>MintBank - Conta</title>
+</head>
+
+<body>
+    <div class="account">
+        <a href="index.html"><img class="logo" src="media/mint.png" alt=""></a>
+
+        <div class="my-account hidden">
+            <button class="logout-button" onclick="Logout()">Sair</button>
+
+            <div class="account-image-container">
+                <img class="account-image" id="account-image" src="media/default.png" alt="">
+                <i class="fa-solid fa-pen-to-square" onclick="ChangeScreen([$('#image'), $('#update-info'), $('#delete-account')], true)"></i>
+            </div>
+
+            <div class="account-details">
+                <p><b id="account-name"></b></p>
+                <p><em>Saldo atual: R$</em><em id="account-balance"></em></p>
+            </div>
+
+            <div class="form hidden" id="account">
+                <button type="button" class="form-button" onclick="ChangeScreen($('#transfer'), true)">Fazer um PIX</button>
+
+                <h1 class="form-title">Suas transações</h1>
+
+                <div class="transfers-container" id="account-transfers"></div>
+            </div>
+
+            <form class="form hidden" id="image">
+                <h1 class="form-title">Alterar imagem de perfil</h1>
+                <p class="form-subtitle"></p>
+                <div class="form-input-container">
+                    <div class="div-img-input">
+                        <input type="file" class="form-input" id="image-input" name="image" accept=".jpg, .jpeg, .png" multiple="false">
+                        <i class="fa-solid fa-upload" id="image-submit"></i>
+                    </div>
+                </div>
+                <p class="form-error-msg"></p>
+            </form>
+
+            <form class="form hidden" id="update-info">
+                <h1 class="form-title">Atualize seus dados</h1>
+                <p class="form-subtitle"></p>
+                <div class="form-input-container">
+                    <input type="text" class="form-input" id="update-email" name="email" placeholder="aa">
+                    <p class="input-error-msg"></p>
+                </div>
+                <div class="form-input-container">
+                    <input type="text" class="form-input" id="update-phone" name="phone" placeholder="aa">
+                    <p class="input-error-msg"></p>
+                </div>
+                <p class="form-error-msg"></p>
+                <input type="submit" class="form-button" value="ALTERAR">
+            </form>
+
+            <form class="form hidden" id="delete-account">
+                <input type="submit" class="form-button delete" value="EXCLUIR CONTA">
+                <p class="form-link" onclick="ChangeScreen($('#account'), true)">Voltar</p>
+            </form>
+
+            <form class="form hidden" id="transfer">
+                <h1 class="form-title">Fazer um PIX</h1>
+                <p class="form-subtitle"></p>
+                <div class="form-input-container">
+                    <input type="text" class="form-input" id="cpf-input" name="cpf" placeholder="CPF">
+                    <p class="input-error-msg"></p>
+                </div>
+                <div class="form-input-container">
+                    <input type="text" class="form-input" id="value-input" name="value" placeholder="Valor">
+                    <p class="input-error-msg"></p>
+                </div>
+                <div class="form-input-container">
+                    <input type="text" class="form-input" id="message-input" name="message" placeholder="Mensagem (Opcional)" maxlength="255">
+                    <p class="input-error-msg"></p>
+                </div>
+                <p class="form-error-msg"></p>
+                <input type="submit" class="form-button" value="CONTINUAR">
+                <p class="form-link" onclick="ChangeScreen($('#account'), true)">Voltar</p>
+            </form>
+        </div>
+
+        <form class="form hidden" id="login">
+            <h1 class="form-title">Acesse sua conta</h1>
+            <p class="form-subtitle"></p>
+            <div class="form-input-container">
+                <input type="text" class="form-input" id="email-input" name="email" placeholder="E-mail">
+                <p class="input-error-msg"></p>
+            </div>
+            <div class="form-input-container">
+                <input type="password" class="form-input" id="pass-input" placeholder="Senha">
+                <input type="hidden" id="pass_hash-input" name="pass">
+                <p class="input-error-msg"></p>
+            </div>
+            <p class="form-error-msg"></p>
+            <input type="submit" class="form-button" value="CONTINUAR">
+            <p class="form-link" onclick="ChangeScreen($('#forgot_pass1'))">Esqueci minha senha</p>
+            <p class="form-link" onclick="ChangeScreen($('#sign_up'))">Ainda não sou cliente</p>
+        </form>
+
+        <form class="form hidden" id="sign_up">
+            <h1 class="form-title">Abra sua conta</h1>
+            <p class="form-subtitle"></p>
+            <div class="form-input-container">
+                <input type="text" class="form-input" id="cpf-input" name="cpf" placeholder="CPF">
+                <p class="input-error-msg"></p>
+            </div>
+            <div class="form-input-container">
+                <input type="text" class="form-input" id="name-input" name="name" placeholder="Nome completo">
+                <p class="input-error-msg"></p>
+            </div>
+            <div class="form-input-container">
+                <input type="text" class="form-input" id="birth-input" name="birth" placeholder="Data de nascimento">
+                <p class="input-error-msg"></p>
+            </div>
+            <div class="form-input-container">
+                <input type="text" class="form-input" id="phone-input" name="phone" placeholder="Telefone">
+                <p class="input-error-msg"></p>
+            </div>
+            <div class="form-input-container">
+                <input type="text" class="form-input" id="email-input" name="email" placeholder="E-mail">
+                <p class="input-error-msg"></p>
+            </div>
+            <div class="form-input-container">
+                <input type="password" class="form-input" id="pass1-input" placeholder="Senha">
+                <p class="input-error-msg"></p>
+            </div>
+            <div class="form-input-container">
+                <input type="password" class="form-input" id="pass2-input" placeholder="Confirmar senha">
+                <input type="hidden" id="pass_hash-input" name="pass">
+                <p class="input-error-msg"></p>
+            </div>
+            <p class="form-error-msg"></p>
+            <input type="submit" class="form-button" value="CONTINUAR">
+            <p class="form-link" onclick="ChangeScreen($('#login'))">Já tenho uma conta</p>
+        </form>
+
+        <form class="form hidden" id="forgot_pass1">
+            <h1 class="form-title">Esqueci minha senha</h1>
+            <p class="form-subtitle"></p>
+            <div class="form-input-container">
+                <input type="text" class="form-input" id="cpf-input" name="cpf" placeholder="CPF">
+                <p class="input-error-msg"></p>
+            </div>
+            <p class="form-error-msg"></p>
+            <input type="submit" class="form-button" value="CONTINUAR">
+            <p class="form-link" onclick="ChangeScreen($('#login'))">Voltar ao login</p>
+        </form>
+
+        <form class="form hidden" id="forgot_pass2">
+            <h1 class="form-title">Esqueci minha senha</h1>
+            <p class="form-subtitle"></p>
+            <div class="form-input-container">
+                <input type="password" class="form-input" id="pass1-input" placeholder="Nova senha">
+                <p class="input-error-msg"></p>
+            </div>
+            <div class="form-input-container">
+                <input type="password" class="form-input" id="pass2-input" placeholder="Confirmar nova senha">
+                <input type="hidden" id="pass_hash-input" name="pass">
+                <p class="input-error-msg"></p>
+            </div>
+            <p class="form-error-msg"></p>
+            <input type="submit" class="form-button" value="CONTINUAR">
+            <p class="form-link" onclick="ChangeScreen($('#login'))">Voltar ao login</p>
+        </form>
+
+        <form class="form hidden" id="otp">
+            <h1 class="form-title">Autenticação (2FA)</h1>
+            <p class="form-subtitle">Insira o código gerado no aplicativo.</p>
+            <div class="otp-img-container">
+                <img id="otp-img" class="otp-img" src="">
+            </div>
+            <div class="form-input-container">
+                <input type="text" class="form-input" id="otp-input" name="otp" placeholder="Insira o código">
+            </div>
+            <p class="form-error-msg"></p>
+            <input type="submit" class="form-button" value="CONFIRMAR">
+            <p class="form-link" onclick="ChangeScreen($('#login'))">Voltar</p>
+        </form>
+
+    </div>
+
+    <script src="src/constants.js"></script>
+    <script src="js/account.js"></script>
+</body>
+
+</html>

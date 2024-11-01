@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="src/jquery.js"></script>
+    <script src="https://kit.fontawesome.com/ee05ffadc7.js" integrity="sha384-GDwzhvXXagPvQ+BXEpqX/RBXnk/XLb1zoo+zbsfa+FLg/Am/60iTdIobaXhtdfN8" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <title>MintBank</title>
+</head>
+
+<body>
+    <header>
+        <p class="slogan">As menores taxas do mercado.</p>
+        <nav>
+            <ul class="menu-l">
+                <li><img src='media/mint.png' alt="" onclick="logoRedirect()"></li>
+                <li><a class="logo" href='index.html'>Mintbank</a></li>
+                <li><a href='cpf.html'>Pessoa Físca</a></li>
+                <li><a href='cnpj.html'>Pessoa Jurídica</a></li>
+                <li><a href='valores.html'>Valores</a></li>
+            </ul>
+            <ul class="menu-r">
+                <li><a class="sdm-button" href='account.html'>Login</a></li>
+                <li><button class="logout-button hidden" onclick="Logout()">Sair</button></li>
+            </ul>
+            <div class="menu-btn" onclick="toggleMenu()">
+                <div class="menu-btn-burger"></div>
+            </div>
+        </nav>
+        <ul class="mobile-menu">
+            <li><a href='cpf.html'>Pessoa Físca</a></li>
+            <li><a href='cnpj.html'>Pessoa Jurídica</a></li>
+            <li><a class="sdm-button" href='account.html'>Login</a></li>
+            <li><button class="logout-button hidden" onclick="Logout()">Sair</button></li>
+        </ul>
+    </header>
+
+    <div class="home">
+        <div class="section-1"></div>
+        <div class="section-2">
+            <h2>Conta digital, cartão de crédito, investimentos e mais: tudo em um só lugar.</h2>
+        </div>
+        <div class="benefit">
+            <h1>Vantagens de ser Mintbank:</h1>
+        </div>
+
+
+        <ul class="boxes">
+            <li class="box">
+                <i class="fa-solid fa-hand-holding-dollar"></i>
+                <h2>Conta e cartão gratuitos</h2>
+                <p>Ter uma conta no Mintbank não custa nada. A conta é digital e sem tarifa de manutenção.</p>
+            </li>
+            <li class="box">
+                <i class="fa-solid fa-credit-card"></i>
+                <h2>Saque sem tarifa</h2>
+                <p>Saque dinheiro sem taxas em qualquer caixa da rede Banco24Horas.</p>
+            </li>
+            <li class="box">
+                <i class="fa-solid fa-clock"></i>
+                <h2>Atendimento 24h</h2>
+                <p>Conte com a gente 24h por dia, 7 dias por semana pelo chat do app.</p>
+            </li>
+        </ul>
+
+        <div class="contact-section">
+            <div class="contact-logo">
+                <img src="media/mintB.png" alt="">
+            </div>
+            <div class="contact-info">
+                <h2>NOSSO CONTATO</h2>
+                <p>(41) 3271-1515</p>
+                <p>mintbank@pucpr.br</p>
+                <p>Rua Imaculada Conceição, 1155<br>Bairro Prado Velho</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="social-media">
+            <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.pinterest.com/"><i class="fab fa-pinterest-p"></i></a>
+            <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>© 2022 Mintbank</p>
+    </footer>
+
+    <script src="src/constants.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
