@@ -34,7 +34,7 @@ try {
         }
 
         // SUCCESS
-        $new_file_name = sprintf('%s.%s', sha1_file($image_tmp), $ext);
+        $new_file_name = sprintf('%s.%s', hash_file('sha256', $image_tmp), $ext);
         move_uploaded_file($image_tmp, "../images/$new_file_name");
 
         sql("UPDATE users SET image_name = ? WHERE cpf = ?", 'ss', [$new_file_name, $cpf]);
