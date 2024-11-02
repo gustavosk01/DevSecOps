@@ -32,7 +32,14 @@ if (!isset($_SESSION['status'])) {
 }
 
 function sessionDestroy() {
-    setcookie(session_name(), "", 0, "/");
+    setcookie(session_name(), 
+        "",
+        0,
+        "/",
+        "",
+        true,
+        true
+    );
     session_unset();
     session_destroy();
 }
