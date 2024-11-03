@@ -39,3 +39,41 @@ function Logout() {
         location.reload();
     }, 1000);
 }
+
+// EXPAND CONTACT FORM
+$(document).ready(() => {
+    expand_form.on("click", () => {
+        contact_section.toggleClass("hidden");
+        expand_form.toggleClass("fa-plus fa-minus");
+    });
+});
+
+// SEND MSG
+contact_name.on("input", () => vName(contact_name));
+contact_email.on("input", () => vEmail(contact_email));
+contact_subject.on("input", () => vMessage(contact_subject));
+contact_message.on("input", () => vMessage(contact_message));
+
+contact.submit((e) => {
+    e.preventDefault();
+
+    $.ajax({
+        dataType: "json",
+        type: "POST",
+        url: `${back_end}/contact.php`,
+        data: contact.serialize(),
+        beforeSend: () => {
+            if (!isFormValid(contact)) return false;
+        },
+        complete: (e) => {
+            e = e.responseJSON;
+            contact_msg.text(e.message);
+
+            if (e.code == 200) {
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
+            }
+        },
+    });
+});

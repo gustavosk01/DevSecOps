@@ -1,5 +1,19 @@
 const back_end = "./api";
 
+// INDEX PAGE
+
+const expand_form = $("#expand-from");
+const contact_section = $(".form-section");
+
+const contact = $("#contact");
+const contact_name = $("#contact #contact-name");
+const contact_email = $("#contact #contact-email");
+const contact_subject = $("#contact #contact-subject");
+const contact_message = $("#contact #contact-msg");
+const contact_msg = $("#contact .form-error-msg");
+
+// ACCOUNT PAGE
+
 const account = $("#account");
 const account_image = $("#account-image");
 const account_name = $("#account-name");
