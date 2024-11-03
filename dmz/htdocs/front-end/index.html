@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="src/jquery.js"></script>
+    <script src="https://kit.fontawesome.com/ee05ffadc7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <title>MintBank</title>
+</head>
+
+<body>
+    <header>
+        <p class="slogan">As menores taxas do mercado.</p>
+        <nav>
+            <ul class="menu-l">
+                <li><img src='media/mint.png' alt="" onclick="logoRedirect()"></li>
+                <li><a class="logo" href='index.html'>Mintbank</a></li>
+                <li><a href='cpf.html'>Pessoa Físca</a></li>
+                <li><a href='cnpj.html'>Pessoa Jurídica</a></li>
+                <li><a href='valores.html'>Valores</a></li>
+            </ul>
+            <ul class="menu-r">
+                <li><a class="sdm-button" href='account.html'>Login</a></li>
+                <li><button class="logout-button hidden" onclick="Logout()">Sair</button></li>
+            </ul>
+            <div class="menu-btn" onclick="toggleMenu()">
+                <div class="menu-btn-burger"></div>
+            </div>
+        </nav>
+        <ul class="mobile-menu">
+            <li><a href='cpf.html'>Pessoa Físca</a></li>
+            <li><a href='cnpj.html'>Pessoa Jurídica</a></li>
+            <li><a class="sdm-button" href='account.html'>Login</a></li>
+            <li><button class="logout-button hidden" onclick="Logout()">Sair</button></li>
+        </ul>
+    </header>
+
+    <div class="home">
+        <div class="section-1"></div>
+        <div class="section-2">
+            <h2>Conta digital, cartão de crédito, investimentos e mais: tudo em um só lugar.</h2>
+        </div>
+        <div class="benefit">
+            <h1>Vantagens de ser Mintbank:</h1>
+        </div>
+
+        <ul class="boxes">
+            <li class="box">
+                <i class="fa-solid fa-hand-holding-dollar"></i>
+                <h2>Conta e cartão gratuitos</h2>
+                <p>Ter uma conta no Mintbank não custa nada. A conta é digital e sem tarifa de manutenção.</p>
+            </li>
+            <li class="box">
+                <i class="fa-solid fa-credit-card"></i>
+                <h2>Saque sem tarifa</h2>
+                <p>Saque dinheiro sem taxas em qualquer caixa da rede Banco24Horas.</p>
+            </li>
+            <li class="box">
+                <i class="fa-solid fa-clock"></i>
+                <h2>Atendimento 24h</h2>
+                <p>Conte com a gente 24h por dia, 7 dias por semana pelo chat do app.</p>
+            </li>
+        </ul>
+
+        <div class="ratings-section">
+            <h2>DEPOIMENTOS DE CLIENTES</h2>
+            <div class="ratings-container">
+                <div class="ratings-card">
+                    <img src="media/santin.jpg">
+                    <p>"Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quod, expedita aliquid incidunt reiciendis optio molestiae libero sapiente odio neque porro hic suscipit magnam id, repudiandae illum minima. Voluptatem, impedit!"</p>
+                    <h5>- Altair Olivo Santin</h5>
+                </div>
+                <div class="ratings-card">
+                    <img src="media/pedro.png">
+                    <p>"Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui sequi magnam laborum dolorem nisi officiis maxime velit veritatis nemo nobis vel, rem modi hic aliquid labore atque optio animi dolore?"</p>
+                    <h5>- Pedro Horchulhack</h5>
+                </div>
+                <div class="ratings-card">
+                    <img src="media/cleber.png">
+                    <p>"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti soluta cupiditate officiis, a nostrum sed porro veniam! Voluptate tempore, sint perferendis sapiente et in nihil, consequatur voluptatibus pariatur ipsa assumenda?"</p>
+                    <h5>- Cleber Kiel Olivo</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <div class="contact-logo">
+                <img src="media/mintB.png" alt="">
+            </div>
+            <div class="contact-info">
+                <h2>NOSSO CONTATO</h2>
+                <p>(41) 3271-1515</p>
+                <p>mintbank@pucpr.br</p>
+                <p>Rua Imaculada Conceição, 1155<br>Bairro Prado Velho</p>
+                <i class="fa-solid fa-plus" id="expand-from"></i>
+            </div>
+            <div class="form-section hidden">
+                <form class="contact-form" id="contact">
+                    <h2>FALE CONOSCO</h2>
+                    <div class="form-input-container">
+                        <input type="text" placeholder="Nome Completo" maxlength="64" class="form-input contact-input" id="contact-name" name="name">
+                        <p class="input-error-msg"></p>
+                    </div>
+
+                    <div class="form-input-container">
+                        <input type="text" placeholder="E-mail" maxlength="64" class="form-input contact-input" id="contact-email" name="email">
+                        <p class="input-error-msg"></p>
+                    </div>
+
+                    <div class="form-input-container">
+                        <input type="text" placeholder="Assunto" maxlength="64" class="form-input contact-input" id="contact-subject" name="subject">
+                        <p class="input-error-msg"></p>
+                    </div>
+
+                    <div class="form-input-container">
+                        <textarea placeholder="Mensagem" class="form-input contact-textarea" id="contact-msg" name="message"></textarea>
+                        <p class="input-error-msg"></p>
+                    </div>
+                    <p class="form-error-msg"></p>
+                    <input type="submit" value="Enviar" class="sdm-button">
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="social-media">
+            <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://x.com/"><i class="fa-brands fa-square-x-twitter"></i></a>
+            <a href="https://www.pinterest.com/"><i class="fa-brands fa-pinterest-p"></i></a>
+            <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+        <p>© 2024 Mintbank</p>
+    </footer>
+
+    <script src="src/constants.js"></script>
+    <script src="src/functions.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
