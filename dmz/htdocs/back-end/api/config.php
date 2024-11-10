@@ -32,7 +32,7 @@ if (!isset($_SESSION['status'])) {
 }
 
 function sessionDestroy() {
-    setcookie(session_name(), "", 0, "/", "", true, true);
+    setcookie(session_name(), "", 0, "/");
     session_unset();
     session_destroy();
 }
@@ -49,17 +49,14 @@ function responseHandler($code, $message, $data = null) {
     echo json_encode($response);
 }
 
-function getConn() {
+function sql($query, $type, $data) {
     $dbHost = trim(file_get_contents(getenv('DB_HOST')));
     $dbUser = trim(file_get_contents(getenv('DB_USER')));
-    $dbPass = trim(file_get_contents(getenv('DB_PASSWORD_FILE')));
+    $dbPass = trim(file_get_contents(getenv('DB_PASSWORD')));
     $dbTable = trim(file_get_contents(getenv('DB_TABLE')));
-    return new mysqli($dbHost, $dbUser, $dbPass, $dbTable);
-}
-
-function sql($query, $type, $data) {
+    
     try {
-        $conn = getConn();
+        $conn = new mysqli($dbHost, $dbUser, $dbPass, $dbTable);
         $stmt = $conn -> prepare($query);
         $stmt -> bind_param($type, ...$data);
         $stmt -> execute();
@@ -72,13 +69,11 @@ function sql($query, $type, $data) {
         }
 
     } catch (\Throwable $th) {
-        print_r($th);
         return false;
 
     } finally {
         $conn -> close();
     }
-
 }
 
 function genTOTP() {
