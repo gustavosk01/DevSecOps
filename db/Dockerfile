@@ -1,3 +1,3 @@
-FROM mysql:9.0.1
+FROM mysql:8.0
 
 COPY ./mintbank.sql /docker-entrypoint-initdb.d/
