@@ -3,6 +3,7 @@ FROM php:8.2-apache
 COPY ./apache-config /etc/apache2
 COPY ./certificates /etc/ssl
 COPY ./php.ini $PHP_INI_DIR/php.ini
+COPY ./htdocs /var/www/html
 
 ENV APACHE_DOCUMENT_ROOT /var/www/html/front-end
 
