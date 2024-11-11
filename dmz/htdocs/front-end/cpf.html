@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="src/jquery.js"></script>
+    <script src="https://kit.fontawesome.com/ee05ffadc7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <title>MintBank</title>
+</head>
+
+<body>
+    <header>
+        <p class="slogan">As menores taxas do mercado.</p>
+        <nav>
+            <ul class="menu-l">
+                <li><img src='media/mint.png' alt="" onclick="logoRedirect()"></li>
+                <li><a class="logo" href='index.html'>Mintbank</a></li>
+                <li><a href='cpf.html'>Pessoa Físca</a></li>
+                <li><a href='cnpj.html'>Pessoa Jurídica</a></li>
+                <li><a href='valores.html'>Valores</a></li>
+            </ul>
+            <ul class="menu-r">
+                <li><a class="sdm-button" href='account.html'>Login</a></li>
+                <li><button class="logout-button hidden" onclick="Logout()">Sair</button></li>
+            </ul>
+            <div class="menu-btn" onclick="toggleMenu()">
+                <div class="menu-btn-burger"></div>
+            </div>
+        </nav>
+        <ul class="mobile-menu">
+            <li><a href='cpf.html'>Pessoa Físca</a></li>
+            <li><a href='cnpj.html'>Pessoa Jurídica</a></li>
+            <li><a class="sdm-button" href='account.html'>Login</a></li>
+            <li><button class="logout-button hidden" onclick="Logout()">Sair</button></li>
+        </ul>
+    </header>
+
+    <div class="home">
+        <div class="section-1"></div>
+        <div class="section-2">
+            <h2>Diferenciais do MintBank para você pessoa fisica.</h2>
+        </div>
+        <div class="benefit">
+            <h1>Empréstimos para pessoa fisica:</h1>
+        </div>
+
+
+        <ul class="boxes">
+            <li class="box">
+                <i class="fa-solid fa-money-bill"></i>
+                <h2>CDC Crédito consignado</h2>
+                <p>Até R$300 mil para ser pago em até 96 meses, com a primeira parcela a partir de 4 meses.</p>
+            </li>
+            <li class="box">
+                <i class="fa-solid fa-coins"></i>
+                <h2>Crediário</h2>
+                <p>Disponivel até R$30 mil para acquisação de bens/serviços e pagamento de contas, prazo para pagamento de até 54 meses e primeira parcela a partir de 4 meses.</p>
+            </li>
+            <li class="box">
+                <i class="fa-solid fa-car-side"></i>
+                <h2>Crédito Veículo</h2>
+                <p>Até 70% do valor do automovel para ser pago em até 120 meses. com primeira parcela a partir de 4 meses</p>
+            </li>
+        </ul>
+
+        <div class="benefit">
+            <h1>Controle de Finanças:</h1>
+        </div>
+
+        <ul class="boxes">
+            <li class="box">
+                <i class="fa-solid fa-percent"></i>
+                <h2>Parcelamento de faturas</h2>
+                <p>Clientes MintBank podem escolher parcelar faturas dos cartões em até 48 meses, com taxa de juros menores que nos concorrentes</p>
+            </li>
+
+            <li class="box">
+                <i class="fa-solid fa-file-invoice"></i>
+                <h2>Cheque Especial</h2>
+                <p>Juntamente com a opção de parcelar o saldo devedor do cartão, também existe a possibilidade de parcelar o cheque especial, para clientes com renda superior à R$3 mil
+                    em até 48 parcelas
+                </p>
+            </li>
+        </ul>
+
+        <div class="contact-section">
+            <div class="contact-logo">
+                <img src="media/mintB.png" alt="">
+            </div>
+            <div class="contact-info">
+                <h2>NOSSO CONTATO</h2>
+                <p>(41) 3271-1515</p>
+                <p>mintbank@pucpr.br</p>
+                <p>Rua Imaculada Conceição, 1155<br>Bairro Prado Velho</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="src/constants.js"></script>
+    <script src="js/account.js"></script>
+</body>
+
+</html>
