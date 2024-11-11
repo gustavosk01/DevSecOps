@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dmz
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dmz
+  template:
+    metadata:
+      labels:
+        app: dmz
+    spec:
+      containers:
+      - name: dmz
+        image: gustavosk/dmz:latest
+        securityContext:
+          runAsUser: 0
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        ports:
+          - name: http
+            protocol: TCP
+            containerPort: 80
+          - name: https
+            protocol: TCP
+            containerPort: 443
+        env:
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: dmz-secrets
+              key: DB_HOST
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: dmz-secrets
+              key: DB_USER
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: dmz-secrets
+              key: DB_PASSWORD
+        - name: DB_TABLE
+          valueFrom:
+            secretKeyRef:
+              name: dmz-secrets
+              key: DB_TABLE
