@@ -50,10 +50,10 @@ function responseHandler($code, $message, $data = null) {
 }
 
 function getConn() {
-    $dbHost = trim(file_get_contents(getenv('DB_HOST')));
-    $dbUser = trim(file_get_contents(getenv('DB_USER')));
-    $dbPass = trim(file_get_contents(getenv('DB_PASSWORD')));
-    $dbTable = trim(file_get_contents(getenv('DB_TABLE')));
+    $dbHost = trim(getenv('DB_HOST'));
+    $dbUser = trim(getenv('DB_USER'));
+    $dbPass = trim(getenv('DB_PASSWORD'));
+    $dbTable = trim(getenv('DB_TABLE'));
     return new mysqli($dbHost, $dbUser, $dbPass, $dbTable);
 }
 
