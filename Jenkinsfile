@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        SNYK_TOKEN= credentials('snyk-devsecops')
+        SNYK_TOKEN= credentials('SNYK')
         DOCKER_HUB = credentials('DOCKER_HUB')
     }
     
@@ -55,6 +55,43 @@ pipeline {
             }
         }
 
+        stage('Deploy DB') {
+            steps {
+                withCredentials([file(credentialsId: 'KUBECONFIG', variable: 'KUBECONFIG')]) {
+                    script {
+                        sh '''
+                        microk8s kubectl delete -f DevSecOps/kubernetes/db_pv.yaml --ignore-not-found
+                        microk8s kubectl delete -f DevSecOps/kubernetes/db_secrets.yaml --ignore-not-found
+                        microk8s kubectl delete -f DevSecOps/kubernetes/db_service.yaml --ignore-not-found
+                        microk8s kubectl delete -f DevSecOps/kubernetes/db_stateful_set.yaml --ignore-not-found
+
+                        microk8s kubectl apply -f DevSecOps/kubernetes/db_pv.yaml
+                        microk8s kubectl apply -f DevSecOps/kubernetes/db_secrets.yaml
+                        microk8s kubectl apply -f DevSecOps/kubernetes/db_service.yaml
+                        microk8s kubectl apply -f DevSecOps/kubernetes/db_stateful_set.yaml
+                        '''
+                    }
+                }
+            }
+        }
+
+        stage('Deploy DMZ') {
+            steps {
+                withCredentials([file(credentialsId: 'KUBECONFIG', variable: 'KUBECONFIG')]) {
+                    script {
+                        sh '''
+                        microk8s kubectl delete -f DevSecOps/kubernetes/dmz_service.yaml --ignore-not-found
+                        microk8s kubectl delete -f DevSecOps/kubernetes/dmz_secrets.yaml --ignore-not-found
+                        microk8s kubectl delete -f DevSecOps/kubernetes/dmz_deployment.yaml --ignore-not-found
+
+                        microk8s kubectl apply -f DevSecOps/kubernetes/dmz_secrets.yaml
+                        microk8s kubectl apply -f DevSecOps/kubernetes/dmz_service.yaml
+                        microk8s kubectl apply -f DevSecOps/kubernetes/dmz_deployment.yaml
+                        '''
+                    }
+                }
+            }
+        }
     }
 
     post {
