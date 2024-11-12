@@ -2,8 +2,16 @@ pipeline {
     agent any
     
     environment {
-        SNYK_TOKEN= credentials('SNYK')
+        SNYK_TOKEN = credentials('SNYK')
         DOCKER_HUB = credentials('DOCKER_HUB')
+        MYSQL_ROOT_PASSWORD = credentials('MYSQL_ROOT_PASSWORD')
+        MYSQL_DATABASE = credentials('MYSQL_DATABASE')
+        MYSQL_USER = credentials('MYSQL_USER')
+        MYSQL_PASSWORD = credentials('MYSQL_PASSWORD')
+        DB_HOST = credentials('DB_HOST')
+        DB_USER = credentials('DB_USER')
+        DB_PASSWORD = credentials('DB_PASSWORD')
+        DB_TABLE = credentials('DB_TABLE')
     }
     
     stages {
@@ -60,13 +68,18 @@ pipeline {
                 withCredentials([file(credentialsId: 'KUBECONFIG', variable: 'KUBECONFIG')]) {
                     script {
                         sh '''
-                        microk8s kubectl delete -f DevSecOps/kubernetes/db_pv.yaml --ignore-not-found
-                        microk8s kubectl delete -f DevSecOps/kubernetes/db_secrets.yaml --ignore-not-found
-                        microk8s kubectl delete -f DevSecOps/kubernetes/db_service.yaml --ignore-not-found
+                        microk8s kubectl delete secret db-secrets --ignore-not-found
+                        microk8s kubectl create secret generic db-secrets \
+                            --from-literal=MYSQL_ROOT_PASSWORD="$MYSQL_ROOT_PASSWORD" \
+                            --from-literal=MYSQL_DATABASE="$MYSQL_DATABASE" \
+                            --from-literal=MYSQL_USER="$MYSQL_USER" \
+                            --from-literal=MYSQL_PASSWORD="$MYSQL_PASSWORD"
+                        
                         microk8s kubectl delete -f DevSecOps/kubernetes/db_stateful_set.yaml --ignore-not-found
+                        microk8s kubectl delete -f DevSecOps/kubernetes/db_pv.yaml --ignore-not-found
+                        microk8s kubectl delete -f DevSecOps/kubernetes/db_service.yaml --ignore-not-found
 
                         microk8s kubectl apply -f DevSecOps/kubernetes/db_pv.yaml
-                        microk8s kubectl apply -f DevSecOps/kubernetes/db_secrets.yaml
                         microk8s kubectl apply -f DevSecOps/kubernetes/db_service.yaml
                         microk8s kubectl apply -f DevSecOps/kubernetes/db_stateful_set.yaml
                         '''
@@ -80,11 +93,16 @@ pipeline {
                 withCredentials([file(credentialsId: 'KUBECONFIG', variable: 'KUBECONFIG')]) {
                     script {
                         sh '''
+                        microk8s kubectl delete secret dmz-secrets --ignore-not-found
+                        microk8s kubectl create secret generic dmz-secrets \
+                            --from-literal=DB_HOST="$DB_HOST" \
+                            --from-literal=DB_USER="$DB_USER" \
+                            --from-literal=DB_PASSWORD="$DB_PASSWORD" \
+                            --from-literal=DB_TABLE="$DB_TABLE"
+                        
                         microk8s kubectl delete -f DevSecOps/kubernetes/dmz_service.yaml --ignore-not-found
-                        microk8s kubectl delete -f DevSecOps/kubernetes/dmz_secrets.yaml --ignore-not-found
                         microk8s kubectl delete -f DevSecOps/kubernetes/dmz_deployment.yaml --ignore-not-found
 
-                        microk8s kubectl apply -f DevSecOps/kubernetes/dmz_secrets.yaml
                         microk8s kubectl apply -f DevSecOps/kubernetes/dmz_service.yaml
                         microk8s kubectl apply -f DevSecOps/kubernetes/dmz_deployment.yaml
                         '''
