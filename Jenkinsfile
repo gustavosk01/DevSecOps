@@ -75,8 +75,11 @@ pipeline {
                             --from-literal=MYSQL_USER="$MYSQL_USER" \
                             --from-literal=MYSQL_PASSWORD="$MYSQL_PASSWORD"
                         
+                        microk8s kubectl delete -n default persistentvolumeclaim --all --ignore-not-found
+                        microk8s kubectl delete -n default persistentvolume db-pv --ignore-not-found
+                        
+
                         microk8s kubectl delete -f DevSecOps/kubernetes/db_stateful_set.yaml --ignore-not-found
-                        microk8s kubectl delete -f DevSecOps/kubernetes/db_pv.yaml --ignore-not-found
                         microk8s kubectl delete -f DevSecOps/kubernetes/db_service.yaml --ignore-not-found
 
                         microk8s kubectl apply -f DevSecOps/kubernetes/db_pv.yaml
